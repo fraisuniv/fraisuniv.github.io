@@ -95,7 +95,9 @@ function carte(l, i, rang) {
       <div class="right"><small>Total pour ${l.duree} an${l.duree > 1 ? "s" : ""}</small>${l.total ? `<span class="first">${fmt(l.total)}</span>` : `<span class="badge warn">Incomplet</span>`}</div>
     </div>
     <div class="bar" title="Comparé à la formation la plus chère"><i data-w="${ratio}"></i></div>
-    ${e.paiement ? `<div class="dossier">💳 ${e.paiement}</div>` : ""}
+    ${l.f.tranches ? `<div class="tranches"><small>Paiement de la ${l.f.annees.every(a => a === l.premiere) ? "" : "1re "}année par tranche</small>${l.f.tranches[0].map((t, k) =>
+      `<div class="tr"><span>${e.echeances[k]}</span><b>${fmt(t)}</b></div>`).join("")}</div>`
+      : e.paiement ? `<div class="dossier">💳 ${e.paiement} Montant de chaque tranche non publié par l'école.</div>` : `<div class="dossier">💳 Montant par tranche non publié par l'école.</div>`}
     ${e.fraisDossier ? `<div class="dossier">Le total inclut ${fmt(e.fraisDossier)} de frais de dossier (payés une fois)</div>` : ""}
     <button class="toggle" type="button" aria-expanded="false">Détail par année et réductions <span class="chev">▾</span></button>
     <div class="more"><div>
@@ -103,6 +105,8 @@ function carte(l, i, rang) {
         <b>${a === null ? "?" : (a / 1000).toLocaleString("fr-FR", { maximumFractionDigits: 1 }) + "k"}</b>
         <div class="col${a === null ? " na" : ""}" data-h="${a === null ? 100 : a / plafond * 100}"></div>
         <span>${k + 1}${k ? "e" : "re"} an.</span></div>`).join("")}</div>
+      ${l.f.tranches && !l.f.tranches.every(t => t.join() === l.f.tranches[0].join()) ? `<table class="tr-table"><thead><tr><th>Année</th>${e.echeances.map(x => `<th>${x.split(" · ")[0]}</th>`).join("")}<th>Total</th></tr></thead><tbody>${l.f.tranches.map((t, k) =>
+        `<tr><td>${k + 1}${k ? "e" : "re"}</td>${t.map(x => `<td>${fmt(x)}</td>`).join("")}<td><b>${fmt(l.f.annees[k])}</b></td></tr>`).join("")}</tbody></table>` : ""}
       ${l.f.note ? `<p class="note">${l.f.note}</p>` : ""}
       ${e.reductions ? `<p class="note"><strong>Réductions :</strong> ${e.reductions}</p>` : ""}
       <p class="note"><strong>Diplôme reconnu ?</strong> ${e.agree ? `L'école figure sur la <a href="${AGREMENT.liste}" target="_blank" rel="noopener">liste officielle des écoles privées agréées (${AGREMENT.annee})</a>.` : "Agrément non vérifié."}${l.f.niveau === "Ingénieur" ? ` Pour le diplôme d'ingénieur, vérifiez aussi la <a href="${AGREMENT.listeIngenieurs}" target="_blank" rel="noopener">liste des écoles autorisées en ingénierie</a>.` : ""} Demandez à l'école si cette formation précise est habilitée par le ministère.</p>

@@ -182,3 +182,12 @@ input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 
 .card a.badge { text-decoration: none; } .card a.badge:hover { filter: brightness(.95); }
 .money .right { text-align: right; }
 .total .per { font-size: .85rem; font-weight: 700; color: var(--muted); }
+.tranches { background: #f6f8fd; border-radius: 12px; padding: 10px 12px; display: grid; gap: 6px; }
+.tranches small { font-size: .72rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+.tr { display: flex; justify-content: space-between; gap: 10px; font-size: .88rem; }
+.tr span { color: var(--muted); }
+.tr b { font-variant-numeric: tabular-nums; }
+.tr-table { width: 100%; border-collapse: collapse; font-size: .78rem; margin-top: 12px; font-variant-numeric: tabular-nums; }
+.tr-table th { text-align: right; color: var(--muted); font-weight: 600; padding: 4px; border-bottom: 1px solid var(--line); }
+.tr-table th:first-child, .tr-table td:first-child { text-align: left; }
+.tr-table td { text-align: right; padding: 4px; border-bottom: 1px solid var(--line); }

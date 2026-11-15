@@ -34,6 +34,7 @@ const ECOLES = [
   },
   {
     id: "polytec-sousse",
+    echeances: ["Tranche 1 · à l'inscription", "Tranche 2 · avant le 31 déc.", "Tranche 3 · avant le 31 mars"],
     paiement: "Payable en 3 tranches : à l'inscription, avant le 31 décembre, avant le 31 mars.",
     nom: "Polytechnique Sousse",
     ville: "Sousse",
@@ -46,13 +47,14 @@ const ECOLES = [
     fraisDossier: 350,
     reductions: "6 % de réduction si toute l'année est payée en une fois.",
     formations: [
-      { niveau: "Ingénieur", domaine: "Ingénierie", intitule: "Cycle ingénieur (2 ans de prépa + 3 ans)", annees: [6950, 6950, 7849, 7849, 7849], note: "" },
-      { niveau: "Architecture", domaine: "Architecture", intitule: "Architecture (6 ans)", annees: [6987, 7240, 7460, 7670, 7880, 8100], note: "" },
-      { niveau: "Licence", domaine: "Non précisé", intitule: "Cycle licence", annees: [6629, 6629, 6629], note: "Filières de licence non détaillées sur la page des tarifs." }
+      { niveau: "Ingénieur", domaine: "Ingénierie", intitule: "Cycle ingénieur (2 ans de prépa + 3 ans)", annees: [6950, 6950, 7849, 7849, 7849], tranches: [[2850,2450,1650],[2850,2450,1650],[3250,2700,1899],[3250,2700,1899],[3250,2700,1899]], note: "" },
+      { niveau: "Architecture", domaine: "Architecture", intitule: "Architecture (6 ans)", annees: [6987, 7240, 7460, 7670, 7880, 8100], tranches: [[2730,2480,1777],[2836,2570,1834],[3025,2550,1885],[3100,2620,1950],[3192,2693,1955],[3280,2770,2050]], note: "En 5e année, l'école annonce 7 880 DT mais ses 3 tranches font 7 840 DT : écart sur la page officielle, à confirmer avec l'école." },
+      { niveau: "Licence", domaine: "Non précisé", intitule: "Cycle licence", annees: [6629, 6629, 6629], tranches: [[2750,2500,1379],[2750,2500,1379],[2750,2500,1379]], note: "Filières de licence non détaillées sur la page des tarifs." }
     ]
   },
   {
     id: "umm",
+    echeances: ["Inscription", "Tranche 1 · à l'inscription", "Tranche 2 · avant le 31 déc.", "Tranche 3 · avant le 31 mars"],
     paiement: "Payable en 3 tranches : à l'inscription, avant le 31 décembre, avant le 31 mars.",
     nom: "Université Mahmoud el Materi (UMM)",
     ville: "Non indiquée",
@@ -65,9 +67,9 @@ const ECOLES = [
     fraisDossier: null,
     reductions: "L'école annonce une hausse de 3 à 5 % par an.",
     formations: [
-      { niveau: "Licence", domaine: "Santé & paramédical", intitule: "Licences santé (infirmier, kiné, obstétrique, nutrition…)", annees: [9900, 9850, 9800], note: "Inscription incluse." },
-      { niveau: "Licence", domaine: "Santé & paramédical", intitule: "Licence anesthésie-réanimation", annees: [10300, 10250, 10200], note: "Inscription incluse." },
-      { niveau: "Master", domaine: "Santé & paramédical", intitule: "Master", annees: [8800, 8750], note: "Inscription incluse." }
+      { niveau: "Licence", domaine: "Santé & paramédical", intitule: "Licences santé (infirmier, kiné, obstétrique, nutrition…)", annees: [9900, 9850, 9800], tranches: [[900,3000,3000,3000],[850,3000,3000,3000],[800,3000,3000,3000]], note: "Inscription incluse." },
+      { niveau: "Licence", domaine: "Santé & paramédical", intitule: "Licence anesthésie-réanimation", annees: [10300, 10250, 10200], tranches: [[900,3150,3150,3100],[850,3150,3150,3100],[800,3150,3150,3100]], note: "Inscription incluse." },
+      { niveau: "Master", domaine: "Santé & paramédical", intitule: "Master", annees: [8800, 8750], tranches: [[900,2650,2650,2600],[850,2650,2650,2600]], note: "Inscription incluse." }
     ]
   },
   {
@@ -92,6 +94,7 @@ const ECOLES = [
   },
   {
     id: "esprit",
+    echeances: ["Tranche 1 · à l'inscription", "Tranche 2 · avant le 15 janv."],
     paiement: "Payable en 2 tranches (à l'inscription, avant le 15 janvier) ou jusqu'à 36 mensualités.",
     nom: "ESPRIT",
     ville: "Ariana",
@@ -104,7 +107,7 @@ const ECOLES = [
     fraisDossier: null,
     reductions: "25 % (moyenne > 15 et 1er de classe) ou 10 % (1er de classe). Frères et sœurs : 25 % pour le 2e enfant, 30 % pour le 3e. Paiement jusqu'à 36 mensualités.",
     formations: [
-      { niveau: "Ingénieur", domaine: "Informatique & numérique", intitule: "Cycle ingénieur, cours du jour (5 ans après le bac scientifique)", annees: [8800, 8800, 8800, 8800, 8800], note: "8 800 DT TTC pour une inscription en 2026-2027, en 2 tranches. La grille garde le prix de l'année d'entrée (ex. 7 950 DT pour les entrés en 2019) : on suppose 8 800 DT chaque année (à vérifier). Étudiants internationaux : 3 000 €." }
+      { niveau: "Ingénieur", domaine: "Informatique & numérique", intitule: "Cycle ingénieur, cours du jour (5 ans après le bac scientifique)", annees: [8800, 8800, 8800, 8800, 8800], tranches: [[4400,4400],[4400,4400],[4400,4400],[4400,4400],[4400,4400]], note: "8 800 DT TTC pour une inscription en 2026-2027, en 2 tranches. La grille garde le prix de l'année d'entrée (ex. 7 950 DT pour les entrés en 2019) : on suppose 8 800 DT chaque année (à vérifier). Étudiants internationaux : 3 000 €." }
     ]
   },
   {
