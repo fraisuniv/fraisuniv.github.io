@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Combien coûte l'université privée en Tunisie ? Comparateur des frais</title>
+  <meta name="description" content="Comparez les frais de scolarité des universités privées en Tunisie : prix par an, coût total du diplôme, frais de dossier. Sources officielles et dates de mise à jour.">
+  <meta property="og:title" content="Comparateur des frais des universités privées en Tunisie">
+  <meta property="og:description" content="Prix par an, coût total du diplôme et sources officielles, école par école.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap nav-in">
+      <a href="#" class="logo">🎓 FraisUniv<span>.tn</span></a>
+      <div class="nav-links">
+        <a href="#comparer">Comparer</a>
+        <a href="#comment">Comment ça marche</a>
+        <a href="#faq">Questions fréquentes</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="blob b1"></div><div class="blob b2"></div>
+    <div class="wrap hero-in">
+      <p class="tag">Tunisie · Année 2026-2027</p>
+      <h1>Combien coûte <em>vraiment</em> une université privée&nbsp;?</h1>
+      <p class="lead">Les prix par an <strong>et le coût total du diplôme</strong>, école par école, avec le lien vers la page officielle.</p>
+      <div class="stats">
+        <div class="stat"><b data-count id="s-ecoles">0</b><span>écoles vérifiées</span></div>
+        <div class="stat"><b data-count id="s-form">0</b><span>formations</span></div>
+        <div class="stat"><b id="s-min">—</b><span>prix le plus bas / an</span></div>
+      </div>
+      <a href="#comparer" class="btn btn-light">Comparer les écoles <span class="arrow">↓</span></a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="comparer" class="filters" aria-label="Filtres">
+      <div class="f-row">
+        <div class="f-group grow">
+          <span class="f-label">Niveau</span>
+          <div class="chips" id="f-niveau" role="radiogroup" aria-label="Niveau"></div>
+        </div>
+        <div class="f-group">
+          <span class="f-label">Trier par</span>
+          <div class="seg" id="f-tri" role="radiogroup" aria-label="Trier par">
+            <button type="button" data-v="total" class="on" role="radio" aria-checked="true">Coût total</button>
+            <button type="button" data-v="an" role="radio" aria-checked="false">1re année</button>
+            <span class="seg-pill"></span>
+          </div>
+        </div>
+      </div>
+      <div class="f-row">
+        <label class="f-group">
+          <span class="f-label">Domaine</span>
+          <select id="f-domaine"><option value="">Tous les domaines</option></select>
+        </label>
+        <label class="f-group">
+          <span class="f-label">Ville</span>
+          <select id="f-ville"><option value="">Toutes les villes</option></select>
+        </label>
+        <label class="f-group grow">
+          <span class="f-label">Budget max par an : <b id="budget-val">Sans limite</b></span>
+          <input id="f-budget" type="range" step="100">
+        </label>
+        <button id="reset" class="btn btn-ghost" type="button">↺ Réinitialiser</button>
+      </div>
+    </section>
+
+    <p id="count" class="count" aria-live="polite"></p>
+    <div id="cards" class="cards"></div>
+
+    <section id="comment" class="steps reveal">
+      <h2>Comment ça marche</h2>
+      <div class="steps-grid">
+        <div class="step"><span>1</span><h3>Choisissez</h3><p>Filtrez par niveau, domaine, ville et budget par an.</p></div>
+        <div class="step"><span>2</span><h3>Comparez</h3><p>Voyez le prix de la 1re année et le coût total du diplôme, du moins cher au plus cher.</p></div>
+        <div class="step"><span>3</span><h3>Vérifiez</h3><p>Ouvrez la page officielle de l'école et vérifiez son agrément avant de vous inscrire.</p></div>
+      </div>
+    </section>
+
+    <section class="info reveal">
+      <h2>Comment lire ces chiffres</h2>
+      <ul>
+        <li><strong>Coût total estimé</strong> = la somme des prix de chaque année publiés par l'école, plus les frais de dossier. Les hausses futures ne sont pas comptées (certaines écoles annoncent +3 à +5 % par an).</li>
+        <li>Chaque prix vient de la <strong>page officielle de l'école</strong>. L'année des tarifs est indiquée : vérifiez toujours auprès de l'école avant de vous inscrire.</li>
+        <li><strong>Agrément :</strong> le ministère de l'Enseignement supérieur publie la seule liste officielle des établissements privés agréés. Vérifiez votre école sur <a href="https://www.mes.tn" target="_blank" rel="noopener">mes.tn</a>.</li>
+        <li>Une erreur ou un prix qui a changé ? Signalez-le pour qu'on corrige.</li>
+      </ul>
+    </section>
+
+    <section id="faq" class="faq reveal">
+      <h2>Questions fréquentes</h2>
+      <details><summary>D'où viennent les prix ?</summary><p>Chaque prix est copié depuis la page officielle de l'école (lien « Page officielle » sur chaque carte). La date de notre vérification est indiquée.</p></details>
+      <details><summary>Le coût total est-il exact ?</summary><p>C'est une estimation : la somme des prix publiés pour chaque année, plus les frais de dossier. Les hausses futures ne sont pas comptées, et certaines écoles annoncent des augmentations chaque année.</p></details>
+      <details><summary>Comment savoir si une école est agréée ?</summary><p>Le ministère de l'Enseignement supérieur publie la liste officielle des établissements privés agréés sur <a href="https://www.mes.tn" target="_blank" rel="noopener">mes.tn</a>. Vérifiez toujours votre école dans cette liste.</p></details>
+      <details><summary>Pourquoi certaines formations sont « Incomplet » ?</summary><p>L'école ne publie pas le prix de toutes les années. Nous n'inventons aucun chiffre : contactez l'école pour le montant manquant.</p></details>
+      <details><summary>Ce site est-il lié aux écoles ?</summary><p>Non. Le site est indépendant et classe les écoles par prix, pas selon qui paie.</p></details>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <p>Site indépendant, non affilié au ministère ni aux écoles. Dernière mise à jour : <span id="maj"></span>.</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
