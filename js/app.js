@@ -1,7 +1,10 @@
 // Transforme les écoles en "une formation = une carte", puis filtre, trie et anime.
-const fmt = n => Math.round(n).toLocaleString("fr-FR").replace(/[  ]/g, " ") + " DT";
+// Les textes passent par t() (js/i18n.js) pour la version arabe.
+const fmt = n => Math.round(n).toLocaleString("fr-FR").replace(/[  ]/g, " ") + " " + t("DT");
 const $ = id => document.getElementById(id);
 const calme = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const ans = n => t(n > 1 ? "{n} ans" : "{n} an", { n });
+const rang1 = k => t(k ? "{k}e" : "{k}re", { k: k + 1 });
 
 const lignes = ECOLES.flatMap(e => e.formations.map(f => {
   const complet = f.annees.every(a => a !== null);
@@ -19,8 +22,8 @@ const etat = { niveau: "", tri: "an" };
 function compter(el, fin, format = n => Math.round(n)) {
   if (calme) { el.textContent = format(fin); return; }
   const t0 = performance.now(), d = 900;
-  const pas = t => {
-    const p = Math.min((t - t0) / d, 1), e = 1 - Math.pow(1 - p, 3);
+  const pas = now => {
+    const p = Math.min((now - t0) / d, 1), e = 1 - Math.pow(1 - p, 3);
     el.textContent = format(fin * e);
     if (p < 1) requestAnimationFrame(pas);
   };
@@ -34,7 +37,7 @@ $("maj").textContent = DERNIERE_MAJ;
 // Puces "niveau"
 const niveaux = ["", ...new Set(lignes.map(l => l.f.niveau))].sort();
 $("f-niveau").innerHTML = niveaux.map(n =>
-  `<button type="button" class="chip${n === "" ? " on" : ""}" data-v="${n}" role="radio" aria-checked="${n === ""}">${n || "Tous"}</button>`).join("");
+  `<button type="button" class="chip${n === "" ? " on" : ""}" data-v="${n}" role="radio" aria-checked="${n === ""}">${t(n || "Tous")}</button>`).join("");
 $("f-niveau").addEventListener("click", ev => {
   const b = ev.target.closest(".chip"); if (!b) return;
   etat.niveau = b.dataset.v;
@@ -47,7 +50,7 @@ const seg = $("f-tri"), pill = seg.querySelector(".seg-pill");
 function placerPill() {
   const on = seg.querySelector("button.on");
   pill.style.width = on.offsetWidth + "px";
-  pill.style.transform = `translateX(${on.offsetLeft - 4}px)`;
+  pill.style.left = on.offsetLeft + "px";
 }
 seg.addEventListener("click", ev => {
   const b = ev.target.closest("button"); if (!b) return;
@@ -57,8 +60,8 @@ seg.addEventListener("click", ev => {
 });
 addEventListener("load", placerPill); addEventListener("resize", placerPill); placerPill();
 
-// Listes déroulantes
-function remplir(select, valeurs) { [...new Set(valeurs)].sort().forEach(v => select.add(new Option(v, v))); }
+// Listes déroulantes (la valeur reste en français, le texte affiché est traduit)
+function remplir(select, valeurs) { [...new Set(valeurs)].sort().forEach(v => select.add(new Option(t(v), v))); }
 remplir($("f-domaine"), lignes.map(l => l.f.domaine));
 remplir($("f-ville"), lignes.map(l => l.ecole.ville));
 
@@ -70,13 +73,15 @@ budget.value = budget.max;
 function majBudget() {
   const p = (budget.value - budget.min) / (budget.max - budget.min) * 100;
   budget.style.setProperty("--p", p + "%");
-  $("budget-val").textContent = +budget.value >= +budget.max ? "Sans limite" : fmt(+budget.value);
+  $("budget-val").textContent = +budget.value >= +budget.max ? t("Sans limite") : fmt(+budget.value);
 }
 
-const SITE = "https://fraisuniv.github.io/";
+const SITE = LANG === "ar" ? "https://fraisuniv.github.io/ar.html" : "https://fraisuniv.github.io/";
 function lienWhatsApp(l) {
-  const t = `${l.f.intitule} à ${l.ecole.nom} : ${fmt(l.premiere)} par an${l.total ? `, ${fmt(l.total)} pour ${l.duree} ans` : ""}. Compare les frais des universités privées en Tunisie : ${SITE}`;
-  return "https://wa.me/?text=" + encodeURIComponent(t);
+  const txt = t("{f} à {e} : {p} par an", { f: t(l.f.intitule), e: l.ecole.nom, p: fmt(l.premiere) })
+    + (l.total ? t(", {t} pour {n} ans", { t: fmt(l.total), n: l.duree }) : "")
+    + t(". Compare les frais des universités privées en Tunisie : {s}", { s: SITE });
+  return "https://wa.me/?text=" + encodeURIComponent(txt);
 }
 
 function carte(l, i, rang) {
@@ -84,44 +89,47 @@ function carte(l, i, rang) {
   const ancien = e.annee !== "2026-2027";
   const plafond = Math.max(...l.f.annees.filter(a => a !== null));
   const ratio = l.total ? l.total / maxTotal * 100 : 0;
-  return `<article class="card${rang === 1 && l.total ? " best" : ""}${typeof choisis !== "undefined" && choisis.has(lignes.indexOf(l)) ? " picked" : ""}" style="--i:${i}" data-k="${lignes.indexOf(l)}">
+  const fixe = l.f.annees.every(a => a === l.premiere);
+  const k = lignes.indexOf(l);
+  const pris = typeof choisis !== "undefined" && choisis.has(k);
+  return `<article class="card${rang === 1 && l.total ? " best" : ""}${pris ? " picked" : ""}" style="--i:${i}" data-k="${k}">
     <div class="card-top">
-      <div><div class="school">${e.nom}</div><div class="where">📍 ${e.ville}</div></div>
-      <span class="rank">${rang === 1 && l.total ? "★ Moins cher" : "#" + rang}</span>
+      <div><div class="school">${e.nom}</div><div class="where">📍 ${t(e.ville)}</div></div>
+      <span class="rank">${rang === 1 && l.total ? t("★ Moins cher") : "#" + rang}</span>
     </div>
-    <div class="title">${l.f.intitule}</div>
+    <div class="title">${t(l.f.intitule)}</div>
     <div class="badges">
-      <span class="badge">${l.f.niveau}</span>
-      <span class="badge grey">${l.duree} an${l.duree > 1 ? "s" : ""}</span>
-      <span class="badge ${ancien ? "warn" : "ok"}">Tarifs ${e.annee}</span>
-      ${e.agree ? `<a class="badge ok" href="${AGREMENT.liste}" target="_blank" rel="noopener" title="Figure sur la liste officielle du ministère ${AGREMENT.annee}">✓ École agréée</a>` : `<span class="badge warn">Agrément non vérifié</span>`}
+      <span class="badge">${t(l.f.niveau)}</span>
+      <span class="badge grey">${ans(l.duree)}</span>
+      <span class="badge ${ancien ? "warn" : "ok"}">${e.annee === "Non indiquée" ? t("Tarifs Non indiquée") : t("Tarifs {a}", { a: e.annee })}</span>
+      ${e.agree ? `<a class="badge ok" href="${AGREMENT.liste}" target="_blank" rel="noopener" title="${t("Figure sur la liste officielle du ministère {a}", { a: AGREMENT.annee })}">${t("✓ École agréée")}</a>` : `<span class="badge warn">${t("Agrément non vérifié")}</span>`}
     </div>
     <div class="money">
-      <div><small>Prix par an${l.f.annees.every(a => a === l.premiere) ? "" : " (1re année)"}</small><div class="total">${fmt(l.premiere)}<span class="per"> / an</span></div></div>
-      <div class="right"><small>Total pour ${l.duree} an${l.duree > 1 ? "s" : ""}</small>${l.total ? `<span class="first">${fmt(l.total)}</span>` : `<span class="badge warn">Incomplet</span>`}</div>
+      <div><small>${t(fixe ? "Prix par an" : "Prix par an (1re année)")}</small><div class="total">${fmt(l.premiere)}<span class="per">${t(" / an")}</span></div></div>
+      <div class="right"><small>${t(l.duree > 1 ? "Total pour {n} ans" : "Total pour {n} an", { n: l.duree })}</small>${l.total ? `<span class="first">${fmt(l.total)}</span>` : `<span class="badge warn">${t("Incomplet")}</span>`}</div>
     </div>
-    <div class="bar" title="Comparé à la formation la plus chère"><i data-w="${ratio}"></i></div>
-    ${l.f.tranches ? `<div class="tranches"><small>Paiement de la ${l.f.annees.every(a => a === l.premiere) ? "" : "1re "}année par tranche</small>${l.f.tranches[0].map((t, k) =>
-      `<div class="tr"><span>${e.echeances[k]}</span><b>${fmt(t)}</b></div>`).join("")}</div>`
-      : e.paiement ? `<div class="dossier">💳 ${e.paiement} Montant de chaque tranche non publié par l'école.</div>` : `<div class="dossier">💳 Montant par tranche non publié par l'école.</div>`}
-    ${e.fraisDossier ? `<div class="dossier">Le total inclut ${fmt(e.fraisDossier)} de frais de dossier (payés une fois)</div>` : ""}
-    <button class="toggle" type="button" aria-expanded="false">Détail par année et réductions <span class="chev">▾</span></button>
+    <div class="bar" title="${t("Comparé à la formation la plus chère")}"><i data-w="${ratio}"></i></div>
+    ${l.f.tranches ? `<div class="tranches"><small>${t(fixe ? "Paiement de l'année par tranche" : "Paiement de la 1re année par tranche")}</small>${l.f.tranches[0].map((x, j) =>
+      `<div class="tr"><span>${t(e.echeances[j])}</span><b>${fmt(x)}</b></div>`).join("")}</div>`
+      : e.paiement ? `<div class="dossier">💳 ${t(e.paiement)} ${t("Montant de chaque tranche non publié par l'école.")}</div>` : `<div class="dossier">💳 ${t("Montant par tranche non publié par l'école.")}</div>`}
+    ${e.fraisDossier ? `<div class="dossier">${t("Le total inclut {x} de frais de dossier (payés une fois)", { x: fmt(e.fraisDossier) })}</div>` : ""}
+    <button class="toggle" type="button" aria-expanded="false">${t("Détail par année et réductions")} <span class="chev">▾</span></button>
     <div class="more"><div>
-      <div class="years">${l.f.annees.map((a, k) => `<div class="yr">
+      <div class="years">${l.f.annees.map((a, j) => `<div class="yr">
         <b>${a === null ? "?" : (a / 1000).toLocaleString("fr-FR", { maximumFractionDigits: 1 }) + "k"}</b>
         <div class="col${a === null ? " na" : ""}" data-h="${a === null ? 100 : a / plafond * 100}"></div>
-        <span>${k + 1}${k ? "e" : "re"} an.</span></div>`).join("")}</div>
-      ${l.f.tranches && !l.f.tranches.every(t => t.join() === l.f.tranches[0].join()) ? `<table class="tr-table"><thead><tr><th>Année</th>${e.echeances.map(x => `<th>${x.split(" · ")[0]}</th>`).join("")}<th>Total</th></tr></thead><tbody>${l.f.tranches.map((t, k) =>
-        `<tr><td>${k + 1}${k ? "e" : "re"}</td>${t.map(x => `<td>${fmt(x)}</td>`).join("")}<td><b>${fmt(l.f.annees[k])}</b></td></tr>`).join("")}</tbody></table>` : ""}
-      ${l.f.note ? `<p class="note">${l.f.note}</p>` : ""}
-      ${e.reductions ? `<p class="note"><strong>Réductions :</strong> ${e.reductions}</p>` : ""}
-      <p class="note"><strong>Diplôme reconnu ?</strong> ${e.agree ? `L'école figure sur la <a href="${AGREMENT.liste}" target="_blank" rel="noopener">liste officielle des écoles privées agréées (${AGREMENT.annee})</a>.` : "Agrément non vérifié."}${l.f.niveau === "Ingénieur" ? ` Pour le diplôme d'ingénieur, vérifiez aussi la <a href="${AGREMENT.listeIngenieurs}" target="_blank" rel="noopener">liste des écoles autorisées en ingénierie</a>.` : ""} Demandez à l'école si cette formation précise est habilitée par le ministère.</p>
+        <span>${t(j ? "{k}e an." : "{k}re an.", { k: j + 1 })}</span></div>`).join("")}</div>
+      ${l.f.tranches && !l.f.tranches.every(x => x.join() === l.f.tranches[0].join()) ? `<table class="tr-table"><thead><tr><th>${t("Année")}</th>${e.echeances.map(x => `<th>${t(x.split(" · ")[0])}</th>`).join("")}<th>${t("Total")}</th></tr></thead><tbody>${l.f.tranches.map((x, j) =>
+        `<tr><td>${rang1(j)}</td>${x.map(m => `<td>${fmt(m)}</td>`).join("")}<td><b>${fmt(l.f.annees[j])}</b></td></tr>`).join("")}</tbody></table>` : ""}
+      ${l.f.note ? `<p class="note">${t(l.f.note)}</p>` : ""}
+      ${e.reductions ? `<p class="note"><strong>${t("Réductions :")}</strong> ${t(e.reductions)}</p>` : ""}
+      <p class="note"><strong>${t("Diplôme reconnu ?")}</strong> ${e.agree ? t("L'école figure sur la <a href=\"{u}\" target=\"_blank\" rel=\"noopener\">liste officielle des écoles privées agréées ({a})</a>.", { u: AGREMENT.liste, a: AGREMENT.annee }) : t("Agrément non vérifié.")}${l.f.niveau === "Ingénieur" ? t(" Pour le diplôme d'ingénieur, vérifiez aussi la <a href=\"{u}\" target=\"_blank\" rel=\"noopener\">liste des écoles autorisées en ingénierie</a>.", { u: AGREMENT.listeIngenieurs }) : ""}${t(" Demandez à l'école si cette formation précise est habilitée par le ministère.")}</p>
     </div></div>
     <div class="card-actions">
-      <label class="pick"><input type="checkbox" data-pick="${lignes.indexOf(l)}"${typeof choisis !== "undefined" && choisis.has(lignes.indexOf(l)) ? " checked" : ""}> Comparer</label>
-      <a class="wa" href="${lienWhatsApp(l)}" target="_blank" rel="noopener" aria-label="Partager sur WhatsApp">Partager sur WhatsApp</a>
+      <label class="pick"><input type="checkbox" data-pick="${k}"${pris ? " checked" : ""}> ${t("Comparer")}</label>
+      <a class="wa" href="${lienWhatsApp(l)}" target="_blank" rel="noopener">${t("Partager sur WhatsApp")}</a>
     </div>
-    <div class="card-foot"><a href="${e.source}" target="_blank" rel="noopener">Page officielle ↗</a><span>Vérifié le ${e.verifie}</span></div>
+    <div class="card-foot"><a href="${e.source}" target="_blank" rel="noopener">${t("Page officielle ↗")}</a><span>${t("Vérifié le {d}", { d: e.verifie })}</span></div>
   </article>`;
 }
 
@@ -135,14 +143,12 @@ function afficher() {
     .filter(l => l.maxAn <= max)
     .sort((a, b) => etat.tri === "an" ? a.premiere - b.premiere : (a.total ?? Infinity) - (b.total ?? Infinity));
 
-  $("count").innerHTML = `<b>${res.length}</b> formation${res.length > 1 ? "s" : ""} trouvée${res.length > 1 ? "s" : ""}`;
+  $("count").innerHTML = t(res.length > 1 ? "{n} formations trouvées" : "{n} formation trouvée", { n: `<b>${res.length}</b>` });
 
-  {
-    $("cards").innerHTML = res.length ? res.map((l, i) => carte(l, i, i + 1)).join("")
-      : `<div class="empty"><div class="big">🔎</div><h3>Aucune formation ne correspond</h3><p>Essayez un budget plus élevé ou un autre niveau.</p><button class="btn btn-ghost" type="button" id="reset2">↺ Voir toutes les formations</button></div>`;
-    requestAnimationFrame(() => requestAnimationFrame(() =>
-      document.querySelectorAll(".bar i").forEach(b => b.style.width = b.dataset.w + "%")));
-  }
+  $("cards").innerHTML = res.length ? res.map((l, i) => carte(l, i, i + 1)).join("")
+    : `<div class="empty"><div class="big">🔎</div><h3>${t("Aucune formation ne correspond")}</h3><p>${t("Essayez un budget plus élevé ou un autre niveau.")}</p><button class="btn btn-ghost" type="button" id="reset2">${t("↺ Voir toutes les formations")}</button></div>`;
+  requestAnimationFrame(() => requestAnimationFrame(() =>
+    document.querySelectorAll(".bar i").forEach(b => b.style.width = b.dataset.w + "%")));
 }
 
 ["f-domaine", "f-ville"].forEach(id => $(id).addEventListener("change", afficher));

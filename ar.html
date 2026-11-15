@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>كم تكلّف الجامعة الخاصة في تونس؟ مقارنة معاليم الدراسة</title>
+  <meta name="description" content="قارن معاليم الدراسة في الجامعات والمدارس الخاصة في تونس: السعر في السنة، الكلفة الجملية للشهادة، الأقساط، والمصادر الرسمية مع تاريخ التحيين.">
+  <meta property="og:title" content="مقارنة معاليم الجامعات الخاصة في تونس">
+  <meta property="og:description" content="السعر في السنة، مجموع الشهادة والمصادر الرسمية، مؤسسة بمؤسسة.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fraisuniv.github.io/ar.html">
+  <meta property="og:locale" content="ar_TN">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://fraisuniv.github.io/ar.html">
+  <link rel="alternate" hreflang="fr" href="https://fraisuniv.github.io/">
+  <link rel="alternate" hreflang="ar" href="https://fraisuniv.github.io/ar.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/extras.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap nav-in">
+      <a href="#" class="logo" dir="ltr">🎓 FraisUniv<span>.tn</span></a>
+      <div class="nav-links">
+        <a href="#quiz">اختبار</a>
+        <a href="#comparer">قارن</a>
+        <a href="#calcul">احسب</a>
+        <a href="#avant">قبل الدفع</a>
+        <a href="#faq">أسئلة</a>
+        <a href="./" class="lang" lang="fr" hreflang="fr">FR</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="blob b1"></div><div class="blob b2"></div>
+    <div class="wrap hero-in">
+      <p class="tag">تونس · السنة الجامعية 2026-2027</p>
+      <h1>كم تكلّف الجامعة الخاصة <em>حقّاً</em>؟</h1>
+      <p class="lead">السعر في السنة <strong>والكلفة الجملية للشهادة</strong>، مؤسسة بمؤسسة، مع رابط الصفحة الرسمية.</p>
+      <div class="stats">
+        <div class="stat"><b data-count id="s-ecoles">0</b><span>مؤسسات تمّ التثبّت منها</span></div>
+        <div class="stat"><b data-count id="s-form">0</b><span>تكوينات</span></div>
+        <div class="stat"><b id="s-min">—</b><span>أقلّ سعر في السنة</span></div>
+      </div>
+      <a href="#comparer" class="btn btn-light">قارن المؤسسات <span class="arrow">↓</span></a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="comment" class="steps">
+      <h2>كيف يعمل الموقع</h2>
+      <div class="steps-grid">
+        <div class="step"><span>1</span><h3>اختر</h3><p>صفِّ النتائج حسب المستوى والاختصاص والمدينة والميزانية السنوية.</p></div>
+        <div class="step"><span>2</span><h3>قارن</h3><p>شاهد سعر السنة الأولى والكلفة الجملية للشهادة، من الأرخص إلى الأغلى.</p></div>
+        <div class="step"><span>3</span><h3>تثبّت</h3><p>افتح الصفحة الرسمية للمؤسسة وتثبّت من ترخيصها قبل التسجيل.</p></div>
+      </div>
+    </section>
+
+    <section id="quiz" class="quiz">
+      <div class="quiz-head">
+        <span class="kicker">اختبار · 30 ثانية</span>
+        <h2>أيّ تكوين يناسبني؟</h2>
+        <p>أجب عن 4 أسئلة، ونعرض لك التكوينات التي تناسب مشروعك وميزانيتك.</p>
+      </div>
+      <div class="quiz-box">
+        <div class="quiz-progress"><i id="q-bar"></i></div>
+        <div id="q-step"></div>
+      </div>
+    </section>
+
+    <section id="comparer" class="filters" aria-label="التصفية">
+      <div class="f-row">
+        <div class="f-group grow">
+          <span class="f-label">المستوى</span>
+          <div class="chips" id="f-niveau" role="radiogroup" aria-label="المستوى"></div>
+        </div>
+        <div class="f-group">
+          <span class="f-label">الترتيب حسب</span>
+          <div class="seg" id="f-tri" role="radiogroup" aria-label="الترتيب حسب">
+            <button type="button" data-v="an" class="on" role="radio" aria-checked="true">السعر في السنة</button>
+            <button type="button" data-v="total" role="radio" aria-checked="false">مجموع الشهادة</button>
+            <span class="seg-pill"></span>
+          </div>
+        </div>
+      </div>
+      <div class="f-row">
+        <label class="f-group">
+          <span class="f-label">الاختصاص</span>
+          <select id="f-domaine"><option value="">كل الاختصاصات</option></select>
+        </label>
+        <label class="f-group">
+          <span class="f-label">المدينة</span>
+          <select id="f-ville"><option value="">كل المدن</option></select>
+        </label>
+        <label class="f-group grow">
+          <span class="f-label">أقصى ميزانية في السنة: <b id="budget-val">بدون حدّ</b></span>
+          <input id="f-budget" type="range" step="100">
+        </label>
+        <button id="reset" class="btn btn-ghost" type="button">↺ إعادة الضبط</button>
+      </div>
+    </section>
+
+    <p id="count" class="count" aria-live="polite"></p>
+    <div id="cards" class="cards"></div>
+
+    <section id="calcul" class="calc reveal">
+      <div class="calc-head">
+        <span class="kicker">الحاسبة</span>
+        <h2>كم سأدفع فعلاً؟</h2>
+        <p>اختر تكويناً: نحسب لك ما يعادله في الشهر والتخفيضات التي تنشرها المؤسسة.</p>
+      </div>
+      <div class="calc-grid">
+        <div class="calc-form">
+          <label class="f-group"><span class="f-label">التكوين</span><select id="c-form"></select></label>
+          <div id="c-opts" class="c-opts"></div>
+        </div>
+        <div class="calc-res" id="c-res" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="avant" class="check reveal">
+      <div class="calc-head">
+        <span class="kicker">قبل الدفع</span>
+        <h2>8 أسئلة تطرحها على المؤسسة</h2>
+        <p>ضع علامة كلّما حصلت على الإجابة. يمكنك نسخ القائمة وإرسالها إلى المؤسسة في رسالة.</p>
+      </div>
+      <div class="check-box">
+        <div class="check-top"><div class="quiz-progress"><i id="ck-bar"></i></div><b id="ck-count">0 / 8</b></div>
+        <ul id="ck-list" class="ck-list"></ul>
+        <button id="ck-copy" class="btn btn-ghost" type="button">📋 انسخ القائمة</button>
+      </div>
+    </section>
+
+    <section class="info reveal">
+      <h2>كيف تقرأ هذه الأرقام</h2>
+      <ul>
+        <li><strong>الكلفة الجملية التقديرية</strong> = مجموع أسعار كل سنة كما تنشرها المؤسسة، مع معلوم الملف. لا تُحتسب الزيادات المستقبلية (بعض المؤسسات تعلن زيادة من 3 إلى 5 % سنوياً).</li>
+        <li>كل سعر مأخوذ من <strong>الصفحة الرسمية للمؤسسة</strong>. سنة التعريفات مذكورة: تثبّت دائماً مع المؤسسة قبل التسجيل.</li>
+        <li><strong>الترخيص:</strong> تنشر وزارة التعليم العالي القائمة الرسمية الوحيدة للمؤسسات الخاصة المرخّص لها. تثبّت من مؤسستك على <a href="https://www.mes.tn" target="_blank" rel="noopener">mes.tn</a>.</li>
+        <li>خطأ أو سعر تغيّر؟ أعلمنا لنصلحه.</li>
+      </ul>
+    </section>
+
+    <section id="faq" class="faq reveal">
+      <h2>أسئلة متكرّرة</h2>
+      <details><summary>من أين تأتي الأسعار؟</summary><p>كل سعر منقول من الصفحة الرسمية للمؤسسة (رابط «الصفحة الرسمية» في كل بطاقة)، مع تاريخ تثبّتنا منه.</p></details>
+      <details><summary>هل الكلفة الجملية دقيقة؟</summary><p>هي تقدير: مجموع الأسعار المنشورة لكل سنة مع معلوم الملف. لا تُحتسب الزيادات المستقبلية، وبعض المؤسسات تعلن زيادات كل سنة.</p></details>
+      <details><summary>كيف أعرف أنّ المؤسسة مرخّص لها؟</summary><p>تنشر وزارة التعليم العالي القائمة الرسمية للمؤسسات الخاصة المرخّص لها على <a href="https://www.mes.tn" target="_blank" rel="noopener">mes.tn</a>. تثبّت دائماً من مؤسستك في هذه القائمة.</p></details>
+      <details><summary>هل ستعترف الدولة بشهادتي؟</summary><p>حسب الوزارة، المؤسسات الخاصة <strong>المرخّص لها</strong> وحدها مؤهّلة لإسناد شهادات جامعية معترف بها وقابلة للمعادلة. تمّ التثبّت من كل مؤسسة في الموقع في <a href="https://www.mes.tn/image.php?id=20985" target="_blank" rel="noopener">القائمة الرسمية 2025-2026</a> (شارة «✓ مؤسسة مرخّص لها»). بالنسبة لشهادة المهندس توجد <a href="https://www.mes.tn/image.php?id=21192" target="_blank" rel="noopener">قائمة خاصة</a>. قبل الدفع، اسأل المؤسسة أيضاً إن كان التكوين الذي تريده بالذات (إجازة، ماجستير) مؤهَّلاً من الوزارة. المصدر: <a href="https://www.mes.tn/page.php?code_menu=147&code_menu_parent=54" target="_blank" rel="noopener">mes.tn</a>.</p></details>
+      <details><summary>هل توجد كلية خاصة للطب أو طب الأسنان في تونس؟</summary><p>في أفريل 2019، أعلنت الوزارة أنها رفضت كل المطالب وأنه لن يُرخَّص لأي جامعة خاصة في الطب أو طب الأسنان (<a href="https://www.webdo.tn/fr/actualite/national/aucune-universite-privee-en-medecine-ne-verra-le-jour-assure-le-ministere-de-lenseignement-superieur/150460/" target="_blank" rel="noopener">Webdo، 15/04/2019</a>). لم نجد إعلاناً مخالفاً منذ ذلك الحين. المؤسسات الخاصة في مجال الصحة تقدّم تكوينات <strong>شبه طبية</strong> (تمريض، علاج طبيعي، قبالة…). احذر من العروض التي تعدك بشهادة طبيب في مؤسسة خاصة في تونس.</p></details>
+      <details><summary>لماذا بعض التكوينات «غير مكتملة»؟</summary><p>لا تنشر المؤسسة أسعار كل السنوات. لا نخترع أي رقم: اتصل بالمؤسسة لمعرفة المبلغ الناقص.</p></details>
+      <details><summary>هل للموقع علاقة بالمؤسسات؟</summary><p>لا. الموقع مستقلّ ويرتّب المؤسسات حسب السعر، وليس حسب من يدفع.</p></details>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <p>موقع مستقلّ، غير تابع للوزارة ولا للمؤسسات. آخر تحيين: <span id="maj"></span>.</p>
+  </footer>
+
+  <div id="cmp-bar" class="cmp-bar" hidden>
+    <span id="cmp-txt"></span>
+    <button id="cmp-clear" class="btn btn-ghost" type="button">إفراغ</button>
+    <button id="cmp-open" class="btn btn-primary" type="button">قارن</button>
+  </div>
+  <div id="cmp-modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="cmp-title">
+    <div class="modal-box">
+      <div class="modal-head"><h2 id="cmp-title">المقارنة</h2><button id="cmp-close" class="x" type="button" aria-label="إغلاق">✕</button></div>
+      <div class="modal-body" id="cmp-body"></div>
+    </div>
+  </div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/extras.js"></script>
+</body>
+</html>
