@@ -34,7 +34,7 @@ h2 { font-size: 1.6rem; letter-spacing: -.01em; }
 .nav-links a:hover::after { transform: scaleX(1); }
 
 /* Hero */
-.hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #0d2f8a 0%, #2357e8 55%, #7b3fe4 100%); color: #fff; padding: 64px 0 76px; }
+.hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #0d2f8a 0%, #2357e8 55%, #7b3fe4 100%); color: #fff; padding: 56px 0 60px; }
 .hero-in { position: relative; z-index: 1; animation: rise .8s var(--ease) both; }
 .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .45; }
 .b1 { width: 380px; height: 380px; background: #5ec8ff; top: -120px; right: -60px; animation: float 12s ease-in-out infinite; }
@@ -59,7 +59,7 @@ h2 { font-size: 1.6rem; letter-spacing: -.01em; }
 :focus-visible { outline: 3px solid rgba(35,87,232,.45); outline-offset: 2px; border-radius: 10px; }
 
 /* Filtres */
-.filters { position: relative; z-index: 10; background: #fff; padding: 18px 20px; border-radius: var(--r); margin-top: -36px; box-shadow: var(--shadow); display: grid; gap: 16px; animation: rise .8s .15s var(--ease) both; }
+.filters { position: relative; z-index: 10; background: #fff; padding: 18px 20px; border-radius: var(--r); margin-top: 28px; box-shadow: var(--shadow); display: grid; gap: 16px; animation: rise .8s .15s var(--ease) both; }
 .f-row { display: flex; gap: 18px; flex-wrap: wrap; align-items: flex-end; }
 .f-group { display: flex; flex-direction: column; gap: 8px; min-width: 170px; }
 .f-group.grow { flex: 1; }
@@ -137,7 +137,8 @@ input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 
 .empty p { color: var(--muted); }
 
 /* Sections */
-.steps { margin: 56px 0 0; }
+.steps { margin: 36px 0 0; }
+.steps h2 { margin: 0 0 16px; }
 .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .step { background: var(--card); border-radius: var(--r); padding: 22px; box-shadow: var(--shadow); transition: transform .25s var(--ease); }
 .step:hover { transform: translateY(-3px); }
