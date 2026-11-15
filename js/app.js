@@ -42,7 +42,14 @@ $("f-niveau").addEventListener("click", ev => {
   const b = ev.target.closest(".chip"); if (!b) return;
   etat.niveau = b.dataset.v;
   $("f-niveau").querySelectorAll(".chip").forEach(c => { c.classList.toggle("on", c === b); c.setAttribute("aria-checked", c === b); });
-  afficher();
+  // Section « Toutes les écoles » : une tuile par école, vers sa fiche
+if ($("school-grid")) $("school-grid").innerHTML = ECOLES.map(e => {
+  const min = Math.min(...e.formations.map(f => f.annees[0]));
+  return `<a class="stile" href="ecoles/${e.id}.html"><span class="mono" style="--c:${e.couleur}" aria-hidden="true">${e.sigle}</span>
+    <span><b>${e.nom}</b><small>📍 ${t(e.ville)} · ${t(e.formations.length > 1 ? "{n} formations" : "{n} formation", { n: e.formations.length })}</small><span class="from">${t("dès {p} / an", { p: fmt(min) })}</span></span></a>`;
+}).join("");
+
+afficher();
 });
 
 // Bouton segmenté "trier par"
@@ -56,7 +63,14 @@ seg.addEventListener("click", ev => {
   const b = ev.target.closest("button"); if (!b) return;
   etat.tri = b.dataset.v;
   seg.querySelectorAll("button").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-checked", x === b); });
-  placerPill(); afficher();
+  placerPill(); // Section « Toutes les écoles » : une tuile par école, vers sa fiche
+if ($("school-grid")) $("school-grid").innerHTML = ECOLES.map(e => {
+  const min = Math.min(...e.formations.map(f => f.annees[0]));
+  return `<a class="stile" href="ecoles/${e.id}.html"><span class="mono" style="--c:${e.couleur}" aria-hidden="true">${e.sigle}</span>
+    <span><b>${e.nom}</b><small>📍 ${t(e.ville)} · ${t(e.formations.length > 1 ? "{n} formations" : "{n} formation", { n: e.formations.length })}</small><span class="from">${t("dès {p} / an", { p: fmt(min) })}</span></span></a>`;
+}).join("");
+
+afficher();
 });
 addEventListener("load", placerPill); addEventListener("resize", placerPill); placerPill();
 
@@ -94,7 +108,7 @@ function carte(l, i, rang) {
   const pris = typeof choisis !== "undefined" && choisis.has(k);
   return `<article class="card${rang === 1 && l.total ? " best" : ""}${pris ? " picked" : ""}" style="--i:${i}" data-k="${k}">
     <div class="card-top">
-      <div><div class="school">${e.nom}</div><div class="where">📍 ${t(e.ville)}</div></div>
+      <div class="who"><span class="mono" style="--c:${e.couleur}" aria-hidden="true">${e.sigle}</span><div><div class="school"><a href="ecoles/${e.id}.html">${e.nom}</a></div><div class="where">📍 ${t(e.ville)}</div></div></div>
       <span class="rank">${rang === 1 && l.total ? t("★ Moins cher") : "#" + rang}</span>
     </div>
     <div class="title">${t(l.f.intitule)}</div>
@@ -159,7 +173,14 @@ function reinitialiser() {
   $("f-niveau").querySelectorAll(".chip").forEach(c => { const on = c.dataset.v === ""; c.classList.toggle("on", on); c.setAttribute("aria-checked", on); });
   $("f-domaine").selectedIndex = 0; $("f-ville").selectedIndex = 0;
   budget.value = budget.max;
-  afficher();
+  // Section « Toutes les écoles » : une tuile par école, vers sa fiche
+if ($("school-grid")) $("school-grid").innerHTML = ECOLES.map(e => {
+  const min = Math.min(...e.formations.map(f => f.annees[0]));
+  return `<a class="stile" href="ecoles/${e.id}.html"><span class="mono" style="--c:${e.couleur}" aria-hidden="true">${e.sigle}</span>
+    <span><b>${e.nom}</b><small>📍 ${t(e.ville)} · ${t(e.formations.length > 1 ? "{n} formations" : "{n} formation", { n: e.formations.length })}</small><span class="from">${t("dès {p} / an", { p: fmt(min) })}</span></span></a>`;
+}).join("");
+
+afficher();
 }
 $("reset").addEventListener("click", reinitialiser);
 
@@ -175,5 +196,12 @@ $("cards").addEventListener("click", ev => {
 // Apparition douce des sections au défilement
 const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("seen"); obs.unobserve(e.target); } }), { threshold: .15 });
 document.querySelectorAll(".reveal").forEach(s => obs.observe(s));
+
+// Section « Toutes les écoles » : une tuile par école, vers sa fiche
+if ($("school-grid")) $("school-grid").innerHTML = ECOLES.map(e => {
+  const min = Math.min(...e.formations.map(f => f.annees[0]));
+  return `<a class="stile" href="ecoles/${e.id}.html"><span class="mono" style="--c:${e.couleur}" aria-hidden="true">${e.sigle}</span>
+    <span><b>${e.nom}</b><small>📍 ${t(e.ville)} · ${t(e.formations.length > 1 ? "{n} formations" : "{n} formation", { n: e.formations.length })}</small><span class="from">${t("dès {p} / an", { p: fmt(min) })}</span></span></a>`;
+}).join("");
 
 afficher();

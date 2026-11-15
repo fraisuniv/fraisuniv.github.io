@@ -18,6 +18,7 @@ const AGREMENT = {
 const ECOLES = [
   {
     id: "esgitech",
+    sigle: "ESG", couleur: "#0e7c86",
     nom: "ESGITECH",
     ville: "Tunis",
     adresse: "Les Berges du Lac 3, Le Kram, Tunis",
@@ -35,6 +36,7 @@ const ECOLES = [
   },
   {
     id: "polytec-sousse",
+    sigle: "PS", couleur: "#c2410c",
     regles: { unefois: 6 },
     echeances: ["Tranche 1 · à l'inscription", "Tranche 2 · avant le 31 déc.", "Tranche 3 · avant le 31 mars"],
     paiement: "Payable en 3 tranches : à l'inscription, avant le 31 décembre, avant le 31 mars.",
@@ -56,6 +58,7 @@ const ECOLES = [
   },
   {
     id: "umm",
+    sigle: "UMM", couleur: "#be185d",
     echeances: ["Inscription", "Tranche 1 · à l'inscription", "Tranche 2 · avant le 31 déc.", "Tranche 3 · avant le 31 mars"],
     paiement: "Payable en 3 tranches : à l'inscription, avant le 31 décembre, avant le 31 mars.",
     nom: "Université Mahmoud el Materi (UMM)",
@@ -76,6 +79,7 @@ const ECOLES = [
   },
   {
     id: "suptech",
+    sigle: "SUP", couleur: "#4338ca",
     paiement: "Payable en 3 tranches : à l'inscription, en janvier, en avril.",
     nom: "Suptech University",
     ville: "Non indiquée",
@@ -96,6 +100,7 @@ const ECOLES = [
   },
   {
     id: "esprit",
+    sigle: "ESP", couleur: "#b91c1c",
     regles: { fratrie: [25, 30] },
     echeances: ["Tranche 1 · à l'inscription", "Tranche 2 · avant le 15 janv."],
     paiement: "Payable en 2 tranches (à l'inscription, avant le 15 janvier) ou jusqu'à 36 mensualités.",
@@ -115,6 +120,7 @@ const ECOLES = [
   },
   {
     id: "ted",
+    sigle: "TED", couleur: "#0f766e",
     nom: "TED University",
     ville: "Tunis",
     adresse: "Charguia 1, Tunis",
@@ -132,6 +138,7 @@ const ECOLES = [
   },
   {
     id: "espima",
+    sigle: "EB", couleur: "#7c3aed",
     nom: "ESPIMA Business School",
     ville: "Tunis",
     adresse: "Tunis",

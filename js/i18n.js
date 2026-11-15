@@ -213,6 +213,9 @@ const AR = {
   "Ex. : Suptech ajoute des frais d'encadrement en dernière année.": "مثال: Suptech تضيف معلوم تأطير في السنة الأخيرة.",
   "Bonjour, avant de m'inscrire j'aimerais savoir :": "السلام عليكم، قبل التسجيل أودّ أن أعرف:",
   "Merci !": "شكراً!",
+  "{n} formations": "{n} تكوينات",
+  "{n} formation": "{n} تكوين",
+  "dès {p} / an": "ابتداءً من {p} / سنة",
   "Liste copiée ✔": "تمّ نسخ القائمة ✔",
   "Copie impossible sur ce navigateur": "النسخ غير ممكن في هذا المتصفّح",
   "Bravo, tu es prêt(e) à décider 🎓": "برافو، أنت جاهز(ة) للاختيار 🎓"
