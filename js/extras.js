@@ -202,3 +202,6 @@ $("ck-copy").addEventListener("click", async () => {
   try { await navigator.clipboard.writeText(txt); toast(t("Liste copiée ✔")); }
   catch { toast(t("Copie impossible sur ce navigateur")); }
 });
+
+// Lien direct vers une section (#ecoles…) : on y va une fois les cartes affichées
+if (location.hash) addEventListener("load", () => { const s = document.querySelector(location.hash); if (s) { s.classList.add("seen"); s.scrollIntoView(); } });
