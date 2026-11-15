@@ -153,3 +153,5 @@
   .fi-from { margin-inline-start: 0; }
   .fi-hero h1 { font-size: 1.6rem; }
 }
+
+main section { scroll-margin-top: 80px; }
