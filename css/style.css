@@ -59,7 +59,7 @@ h2 { font-size: 1.6rem; letter-spacing: -.01em; }
 :focus-visible { outline: 3px solid rgba(35,87,232,.45); outline-offset: 2px; border-radius: 10px; }
 
 /* Filtres */
-.filters { position: sticky; top: 72px; z-index: 10; background: rgba(255,255,255,.92); backdrop-filter: blur(12px); padding: 18px 20px; border-radius: var(--r); margin-top: -36px; box-shadow: var(--shadow); display: grid; gap: 16px; animation: rise .8s .15s var(--ease) both; }
+.filters { position: relative; z-index: 10; background: #fff; padding: 18px 20px; border-radius: var(--r); margin-top: -36px; box-shadow: var(--shadow); display: grid; gap: 16px; animation: rise .8s .15s var(--ease) both; }
 .f-row { display: flex; gap: 18px; flex-wrap: wrap; align-items: flex-end; }
 .f-group { display: flex; flex-direction: column; gap: 8px; min-width: 170px; }
 .f-group.grow { flex: 1; }
