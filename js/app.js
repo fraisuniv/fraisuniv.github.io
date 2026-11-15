@@ -13,7 +13,7 @@ const maxTotal = Math.max(...lignes.map(l => l.total || 0));
 const maxAnnee = Math.max(...lignes.map(l => l.maxAn));
 
 // État des filtres
-const etat = { niveau: "", tri: "total" };
+const etat = { niveau: "", tri: "an" };
 
 // Chiffres du haut, avec compteur animé
 function compter(el, fin, format = n => Math.round(n)) {
@@ -91,11 +91,12 @@ function carte(l, i, rang) {
       ${e.agree ? `<a class="badge ok" href="${AGREMENT.liste}" target="_blank" rel="noopener" title="Figure sur la liste officielle du ministère ${AGREMENT.annee}">✓ École agréée</a>` : `<span class="badge warn">Agrément non vérifié</span>`}
     </div>
     <div class="money">
-      <div><small>1re année</small><span class="first">${fmt(l.premiere)}</span></div>
-      <div><small>Coût total estimé</small>${l.total ? `<div class="total" data-total="${l.total}">${fmt(l.total)}</div>` : `<span class="badge warn">Incomplet</span>`}</div>
+      <div><small>Prix par an${l.f.annees.every(a => a === l.premiere) ? "" : " (1re année)"}</small><div class="total">${fmt(l.premiere)}<span class="per"> / an</span></div></div>
+      <div class="right"><small>Total pour ${l.duree} an${l.duree > 1 ? "s" : ""}</small>${l.total ? `<span class="first">${fmt(l.total)}</span>` : `<span class="badge warn">Incomplet</span>`}</div>
     </div>
     <div class="bar" title="Comparé à la formation la plus chère"><i data-w="${ratio}"></i></div>
-    ${e.fraisDossier ? `<div class="dossier">Inclut ${fmt(e.fraisDossier)} de frais de dossier</div>` : ""}
+    ${e.paiement ? `<div class="dossier">💳 ${e.paiement}</div>` : ""}
+    ${e.fraisDossier ? `<div class="dossier">Le total inclut ${fmt(e.fraisDossier)} de frais de dossier (payés une fois)</div>` : ""}
     <button class="toggle" type="button" aria-expanded="false">Détail par année et réductions <span class="chev">▾</span></button>
     <div class="more"><div>
       <div class="years">${l.f.annees.map((a, k) => `<div class="yr">

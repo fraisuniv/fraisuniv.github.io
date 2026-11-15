@@ -107,7 +107,7 @@ input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 
 .money { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; padding-top: 4px; }
 .money small { display: block; font-size: .75rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .03em; }
 .first { font-weight: 700; font-size: 1.05rem; }
-.total { font-weight: 800; font-size: 1.55rem; color: var(--accent); font-variant-numeric: tabular-nums; letter-spacing: -.01em; text-align: right; }
+.total { font-weight: 800; font-size: 1.55rem; color: var(--accent); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
 .bar { height: 8px; background: #eef1f8; border-radius: 99px; overflow: hidden; }
 .bar i { display: block; height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .9s var(--ease); }
 .best .bar i { background: linear-gradient(90deg, #12b07a, #2bc4a0); }
@@ -180,3 +180,5 @@ input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 
   .reveal { opacity: 1; transform: none; }
 }
 .card a.badge { text-decoration: none; } .card a.badge:hover { filter: brightness(.95); }
+.money .right { text-align: right; }
+.total .per { font-size: .85rem; font-weight: 700; color: var(--muted); }

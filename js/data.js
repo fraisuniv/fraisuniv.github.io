@@ -34,6 +34,7 @@ const ECOLES = [
   },
   {
     id: "polytec-sousse",
+    paiement: "Payable en 3 tranches : à l'inscription, avant le 31 décembre, avant le 31 mars.",
     nom: "Polytechnique Sousse",
     ville: "Sousse",
     adresse: "Route Ceinture Sahloul, Sousse",
@@ -52,6 +53,7 @@ const ECOLES = [
   },
   {
     id: "umm",
+    paiement: "Payable en 3 tranches : à l'inscription, avant le 31 décembre, avant le 31 mars.",
     nom: "Université Mahmoud el Materi (UMM)",
     ville: "Non indiquée",
     adresse: "Ville non indiquée sur le site (à vérifier)",
@@ -70,6 +72,7 @@ const ECOLES = [
   },
   {
     id: "suptech",
+    paiement: "Payable en 3 tranches : à l'inscription, en janvier, en avril.",
     nom: "Suptech University",
     ville: "Non indiquée",
     adresse: "Adresse non indiquée sur le site (à vérifier)",
@@ -79,7 +82,7 @@ const ECOLES = [
     verifie: "15/11/2026",
     agree: true,
     fraisDossier: null,
-    reductions: "Paiement en 3 tranches (inscription, janvier, avril).",
+    reductions: "",
     formations: [
       { niveau: "Ingénieur", domaine: "Informatique & numérique", intitule: "Cycle ingénieur informatique & télécom (2 ans de prépa + 3 ans)", annees: [6500, 6500, 7500, 7500, 8050], note: "Inscription et encadrement inclus." },
       { niveau: "Licence", domaine: "Informatique & numérique", intitule: "Licence informatique", annees: [6500, 6500, 7050], note: "Inscription et encadrement inclus." },
@@ -89,6 +92,7 @@ const ECOLES = [
   },
   {
     id: "esprit",
+    paiement: "Payable en 2 tranches (à l'inscription, avant le 15 janvier) ou jusqu'à 36 mensualités.",
     nom: "ESPRIT",
     ville: "Ariana",
     adresse: "Pôle technologique El Ghazala, Ariana",
