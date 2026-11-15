@@ -88,6 +88,7 @@ function carte(l, i, rang) {
       <span class="badge">${l.f.niveau}</span>
       <span class="badge grey">${l.duree} an${l.duree > 1 ? "s" : ""}</span>
       <span class="badge ${ancien ? "warn" : "ok"}">Tarifs ${e.annee}</span>
+      ${e.agree ? `<a class="badge ok" href="${AGREMENT.liste}" target="_blank" rel="noopener" title="Figure sur la liste officielle du ministère ${AGREMENT.annee}">✓ École agréée</a>` : `<span class="badge warn">Agrément non vérifié</span>`}
     </div>
     <div class="money">
       <div><small>1re année</small><span class="first">${fmt(l.premiere)}</span></div>
@@ -103,6 +104,7 @@ function carte(l, i, rang) {
         <span>${k + 1}${k ? "e" : "re"} an.</span></div>`).join("")}</div>
       ${l.f.note ? `<p class="note">${l.f.note}</p>` : ""}
       ${e.reductions ? `<p class="note"><strong>Réductions :</strong> ${e.reductions}</p>` : ""}
+      <p class="note"><strong>Diplôme reconnu ?</strong> ${e.agree ? `L'école figure sur la <a href="${AGREMENT.liste}" target="_blank" rel="noopener">liste officielle des écoles privées agréées (${AGREMENT.annee})</a>.` : "Agrément non vérifié."}${l.f.niveau === "Ingénieur" ? ` Pour le diplôme d'ingénieur, vérifiez aussi la <a href="${AGREMENT.listeIngenieurs}" target="_blank" rel="noopener">liste des écoles autorisées en ingénierie</a>.` : ""} Demandez à l'école si cette formation précise est habilitée par le ministère.</p>
     </div></div>
     <div class="card-foot"><a href="${e.source}" target="_blank" rel="noopener">Page officielle ↗</a><span>Vérifié le ${e.verifie}</span></div>
   </article>`;
