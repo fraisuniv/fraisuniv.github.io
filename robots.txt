@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://malekbenlabiedh-glitch.github.io/fraisuniv/sitemap.xml
