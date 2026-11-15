@@ -1,5 +1,6 @@
 // Données des écoles — chaque prix vient de la page officielle de l'école (lien "source").
 // "annee" = année universitaire des tarifs. "verifie" = date de notre dernière vérification.
+// "regles" = réductions publiées par l'école : unefois = % si toute l'année est payée en une fois ; fratrie = % pour le 2e et le 3e enfant.
 // "agree" = l'école figure sur la liste officielle des établissements privés agréés (voir AGREMENT).
 // "annees" = prix total de chaque année d'études, en DT (scolarité + inscription quand l'école les sépare).
 // null dans "annees" = montant non publié par l'école.
@@ -34,6 +35,7 @@ const ECOLES = [
   },
   {
     id: "polytec-sousse",
+    regles: { unefois: 6 },
     echeances: ["Tranche 1 · à l'inscription", "Tranche 2 · avant le 31 déc.", "Tranche 3 · avant le 31 mars"],
     paiement: "Payable en 3 tranches : à l'inscription, avant le 31 décembre, avant le 31 mars.",
     nom: "Polytechnique Sousse",
@@ -94,6 +96,7 @@ const ECOLES = [
   },
   {
     id: "esprit",
+    regles: { fratrie: [25, 30] },
     echeances: ["Tranche 1 · à l'inscription", "Tranche 2 · avant le 15 janv."],
     paiement: "Payable en 2 tranches (à l'inscription, avant le 15 janvier) ou jusqu'à 36 mensualités.",
     nom: "ESPRIT",

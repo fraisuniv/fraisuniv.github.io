@@ -16,15 +16,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/extras.css">
 </head>
 <body>
   <nav class="nav">
     <div class="wrap nav-in">
       <a href="#" class="logo">🎓 FraisUniv<span>.tn</span></a>
       <div class="nav-links">
+        <a href="#quiz">Quiz</a>
         <a href="#comparer">Comparer</a>
-        <a href="#comment">Comment ça marche</a>
-        <a href="#faq">Questions fréquentes</a>
+        <a href="#calcul">Calculer</a>
+        <a href="#avant">Avant de payer</a>
+        <a href="#faq">FAQ</a>
       </div>
     </div>
   </nav>
@@ -51,6 +54,18 @@
         <div class="step"><span>1</span><h3>Choisissez</h3><p>Filtrez par niveau, domaine, ville et budget par an.</p></div>
         <div class="step"><span>2</span><h3>Comparez</h3><p>Voyez le prix de la 1re année et le coût total du diplôme, du moins cher au plus cher.</p></div>
         <div class="step"><span>3</span><h3>Vérifiez</h3><p>Ouvrez la page officielle de l'école et vérifiez son agrément avant de vous inscrire.</p></div>
+      </div>
+    </section>
+
+    <section id="quiz" class="quiz">
+      <div class="quiz-head">
+        <span class="kicker">Quiz · 30 secondes</span>
+        <h2>Quelle formation est faite pour moi ?</h2>
+        <p>Réponds à 4 questions, on te montre les formations qui correspondent à ton projet et à ton budget.</p>
+      </div>
+      <div class="quiz-box">
+        <div class="quiz-progress"><i id="q-bar"></i></div>
+        <div id="q-step"></div>
       </div>
     </section>
 
@@ -90,6 +105,34 @@
     <div id="cards" class="cards"></div>
 
 
+    <section id="calcul" class="calc reveal">
+      <div class="calc-head">
+        <span class="kicker">Calculateur</span>
+        <h2>Combien je vais payer vraiment ?</h2>
+        <p>Choisis une formation : on calcule l'équivalent par mois et les réductions publiées par l'école.</p>
+      </div>
+      <div class="calc-grid">
+        <div class="calc-form">
+          <label class="f-group"><span class="f-label">Formation</span><select id="c-form"></select></label>
+          <div id="c-opts" class="c-opts"></div>
+        </div>
+        <div class="calc-res" id="c-res" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="avant" class="check reveal">
+      <div class="calc-head">
+        <span class="kicker">Avant de payer</span>
+        <h2>8 questions à poser à l'école</h2>
+        <p>Coche au fur et à mesure. Tu peux copier la liste pour l'envoyer à l'école par message.</p>
+      </div>
+      <div class="check-box">
+        <div class="check-top"><div class="quiz-progress"><i id="ck-bar"></i></div><b id="ck-count">0 / 8</b></div>
+        <ul id="ck-list" class="ck-list"></ul>
+        <button id="ck-copy" class="btn btn-ghost" type="button">📋 Copier la liste</button>
+      </div>
+    </section>
+
     <section class="info reveal">
       <h2>Comment lire ces chiffres</h2>
       <ul>
@@ -116,7 +159,20 @@
     <p>Site indépendant, non affilié au ministère ni aux écoles. Dernière mise à jour : <span id="maj"></span>.</p>
   </footer>
 
+  <div id="cmp-bar" class="cmp-bar" hidden>
+    <span id="cmp-txt"></span>
+    <button id="cmp-clear" class="btn btn-ghost" type="button">Vider</button>
+    <button id="cmp-open" class="btn btn-primary" type="button">Comparer</button>
+  </div>
+  <div id="cmp-modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="cmp-title">
+    <div class="modal-box">
+      <div class="modal-head"><h2 id="cmp-title">Comparaison</h2><button id="cmp-close" class="x" type="button" aria-label="Fermer">✕</button></div>
+      <div class="modal-body" id="cmp-body"></div>
+    </div>
+  </div>
+
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/extras.js"></script>
 </body>
 </html>

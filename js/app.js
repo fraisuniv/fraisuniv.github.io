@@ -73,12 +73,18 @@ function majBudget() {
   $("budget-val").textContent = +budget.value >= +budget.max ? "Sans limite" : fmt(+budget.value);
 }
 
+const SITE = "https://fraisuniv.github.io/";
+function lienWhatsApp(l) {
+  const t = `${l.f.intitule} à ${l.ecole.nom} : ${fmt(l.premiere)} par an${l.total ? `, ${fmt(l.total)} pour ${l.duree} ans` : ""}. Compare les frais des universités privées en Tunisie : ${SITE}`;
+  return "https://wa.me/?text=" + encodeURIComponent(t);
+}
+
 function carte(l, i, rang) {
   const e = l.ecole;
   const ancien = e.annee !== "2026-2027";
   const plafond = Math.max(...l.f.annees.filter(a => a !== null));
   const ratio = l.total ? l.total / maxTotal * 100 : 0;
-  return `<article class="card${rang === 1 && l.total ? " best" : ""}" style="--i:${i}">
+  return `<article class="card${rang === 1 && l.total ? " best" : ""}${typeof choisis !== "undefined" && choisis.has(lignes.indexOf(l)) ? " picked" : ""}" style="--i:${i}" data-k="${lignes.indexOf(l)}">
     <div class="card-top">
       <div><div class="school">${e.nom}</div><div class="where">📍 ${e.ville}</div></div>
       <span class="rank">${rang === 1 && l.total ? "★ Moins cher" : "#" + rang}</span>
@@ -111,6 +117,10 @@ function carte(l, i, rang) {
       ${e.reductions ? `<p class="note"><strong>Réductions :</strong> ${e.reductions}</p>` : ""}
       <p class="note"><strong>Diplôme reconnu ?</strong> ${e.agree ? `L'école figure sur la <a href="${AGREMENT.liste}" target="_blank" rel="noopener">liste officielle des écoles privées agréées (${AGREMENT.annee})</a>.` : "Agrément non vérifié."}${l.f.niveau === "Ingénieur" ? ` Pour le diplôme d'ingénieur, vérifiez aussi la <a href="${AGREMENT.listeIngenieurs}" target="_blank" rel="noopener">liste des écoles autorisées en ingénierie</a>.` : ""} Demandez à l'école si cette formation précise est habilitée par le ministère.</p>
     </div></div>
+    <div class="card-actions">
+      <label class="pick"><input type="checkbox" data-pick="${lignes.indexOf(l)}"${typeof choisis !== "undefined" && choisis.has(lignes.indexOf(l)) ? " checked" : ""}> Comparer</label>
+      <a class="wa" href="${lienWhatsApp(l)}" target="_blank" rel="noopener" aria-label="Partager sur WhatsApp">Partager sur WhatsApp</a>
+    </div>
     <div class="card-foot"><a href="${e.source}" target="_blank" rel="noopener">Page officielle ↗</a><span>Vérifié le ${e.verifie}</span></div>
   </article>`;
 }
